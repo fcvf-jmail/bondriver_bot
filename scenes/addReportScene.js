@@ -1,5 +1,5 @@
 const { Scenes } = require('telegraf')
-const { createYandexDiskFolder, uploadFilesToDisk } = require('./yandexDiskFunctions')
+const { createYandexDiskFolder, uploadFilesToDisk } = require('../yandexDiskFunctions')
 require('dotenv').config()
 
 const cancelButton = { text: "Отмена", callback_data: "cancelAdding" }
