@@ -128,7 +128,7 @@ async function cancelAdding(ctx) {
 }
 
 async function generateMessageText(ctx) {
-    var messageText = `${ctx.from.first_name}${ctx.from.username ? ` @${ctx.from.username}` : ""}\nДата ${ctx.scene.session.state.date}\n${ctx.scene.session.state.typeOfReport}\nНомер бытовки - ${ctx.scene.session.state.cabinNumber}\nКонтрагент - ${ctx.scene.session.state.nameOfCounteragent}\n\n`
+    var messageText = `${ctx.from.first_name}${ctx.from.username ? ` @${ctx.from.username}` : ""}\nДата ${ctx.scene.session.state.date}\n${ctx.scene.session.state.typeOfReport}\nНомер бытовки - ${ctx.scene.session.state.cabinNumber}\n\nКонтрагент - ${ctx.scene.session.state.nameOfCounteragent}\n\n`
 
     if (ctx.scene.session.state.typeOfReport == "Доставка") {
         messageText += `📍Геолокация: <a href="https://yandex.ru/maps/?text=${ctx.scene.session.state.geolocation.latitude},${ctx.scene.session.state.geolocation.longitude}">${ctx.scene.session.state.geolocation.latitude}, ${ctx.scene.session.state.geolocation.longitude}</a>\n`
