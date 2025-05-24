@@ -11,12 +11,8 @@ const yesNoInlineKeyboard = [[{ text: "Да", callback_data: "yes" }, { text: "�
 module.exports = new Scenes.WizardScene("addReportScene",
     async ctx => {
         if (ctx?.callbackQuery?.data == "cancelAdding") return await cancelAdding(ctx);
-        await ctx.reply("Добрый день! Заполните пожалуйста отчет. Укажите дату рейса", { reply_markup: { inline_keyboard: [[cancelButton]], resize_keyboard: true } })
-        return ctx.wizard.next()
-    },
-    async ctx => {
-        if (ctx?.callbackQuery?.data == "cancelAdding") return await cancelAdding(ctx);
-        ctx.scene.session.state.date = ctx.message.text
+        var date = new Date();
+        ctx.scene.session.state.date = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
         await ctx.reply("Укажите наименование контрагента", { reply_markup: { inline_keyboard: [[cancelButton]], resize_keyboard: true } })
         return ctx.wizard.next()
     },
@@ -128,6 +124,7 @@ async function cancelAdding(ctx) {
 }
 
 async function generateMessageText(ctx) {
+    var date = new Date();
     var messageText = `${ctx.from.first_name}${ctx.from.username ? ` @${ctx.from.username}` : ""}\nДата ${ctx.scene.session.state.date}\n${ctx.scene.session.state.typeOfReport}\nНомер бытовки - ${ctx.scene.session.state.cabinNumber}\n\nКонтрагент - ${ctx.scene.session.state.nameOfCounteragent}\n\n`
 
     if (ctx.scene.session.state.typeOfReport == "Доставка") {
