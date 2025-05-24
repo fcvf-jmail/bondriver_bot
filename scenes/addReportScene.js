@@ -12,7 +12,7 @@ module.exports = new Scenes.WizardScene("addReportScene",
     async ctx => {
         if (ctx?.callbackQuery?.data == "cancelAdding") return await cancelAdding(ctx);
         var date = new Date();
-        ctx.scene.session.state.date = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+        ctx.scene.session.state.date = `${date.getDate().toFixed()}.${date.getMonth()}.${date.getFullYear()}`
         await ctx.reply("Укажите наименование контрагента", { reply_markup: { inline_keyboard: [[cancelButton]], resize_keyboard: true } })
         return ctx.wizard.next()
     },
